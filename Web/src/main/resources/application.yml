@@ -1,0 +1,12 @@
+spring:
+  profiles:
+    active: dev
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://1.15.24.31:3306/test0?serverTimezone=GMT&useSSL=false
+    username: test0
+    password: tlk1475369
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
