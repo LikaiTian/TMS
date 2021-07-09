@@ -7,6 +7,10 @@ import com.example.web.repository.UserRepository;
 import com.example.web.utils.ResultUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 /**
  * @Author Memory
  * @Date 2021/7/7 16:38
@@ -54,17 +58,22 @@ public class UserService {
     }
 
     /**
-     * hr登录
+     * 登录
+     * @param request
      * @param phone
      * @param password
      * @return
      */
-    public Result login(String phone,String password){
+    public Result login(HttpServletRequest request,String phone, String password){
 
         User user=userRepository.findByPhoneAndPassword(phone,password);
         if(user==null){
             return ResultUtils.error(Message.USER_ERR_PASS);
         }
+        HttpSession session=request.getSession();
+        session.setMaxInactiveInterval(30*60);      //以秒为单位，即在没有活动30分钟后，session将失效
+        session.setAttribute("id",user.getId());
+        session.setAttribute("phone",phone);
         return ResultUtils.success(user);
     }
 

@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -62,7 +64,7 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/login",method = RequestMethod.GET)
-    public Result login(String phone,String password){
-        return userService.login(phone,password);
+    public Result login(HttpServletRequest request,String phone, String password){
+        return userService.login(request,phone,password);
     }
 }
