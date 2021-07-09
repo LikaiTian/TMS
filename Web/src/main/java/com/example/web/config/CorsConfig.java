@@ -1,15 +1,16 @@
 package com.example.web.config;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
+        import org.springframework.context.annotation.Bean;
+        import org.springframework.context.annotation.Configuration;
+        import org.springframework.web.cors.CorsConfiguration;
+        import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+        import org.springframework.web.filter.CorsFilter;
 /**
  * @Author Memory
  * @Date 2021/7/9 15:18
  * @Version 1.0
  */
+//解决跨域问题
 @Configuration
 public class CorsConfig {
     private CorsConfiguration buildConfig() {

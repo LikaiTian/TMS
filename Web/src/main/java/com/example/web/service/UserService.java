@@ -7,9 +7,8 @@ import com.example.web.repository.UserRepository;
 import com.example.web.utils.ResultUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @Author Memory
@@ -22,14 +21,17 @@ public class UserService {
     UserRepository userRepository;
 
     /**
-     * hr注册
+     * 注册
      * @param user
      * @return
      */
-    public Result register(User user){
+    public Result register(@RequestBody User user){
+        User user0=userRepository.findByPhone(user.getPhone());
+        if(user0!=null){
+            return ResultUtils.error(Message.USER_IS_EXIST);
+        }
         return ResultUtils.success(userRepository.save(user));
     }
-
     /**
      * 更新hr信息
      * @param user
@@ -54,26 +56,24 @@ public class UserService {
             return ResultUtils.error(Message.USER_NOT_EXIST);
         }
         userRepository.delete(user);
-        return ResultUtils.success(userRepository.findAll());
+        return ResultUtils.success();
     }
 
     /**
      * 登录
-     * @param request
-     * @param phone
-     * @param password
+     * @param user
      * @return
      */
-    public Result login(HttpServletRequest request,String phone, String password){
-
-        User user=userRepository.findByPhoneAndPassword(phone,password);
+    public Result login(@RequestBody User user){
+        User user0=userRepository.findByPhone(user.getPhone());
+        //查不到表示未注册
         if(user==null){
+            return ResultUtils.error(Message.USER_NOT_EXIST);
+        }
+        //密码错误
+        if(!user0.getPassword().equals(user.getPassword())){
             return ResultUtils.error(Message.USER_ERR_PASS);
         }
-        HttpSession session=request.getSession();
-        session.setMaxInactiveInterval(30*60);      //以秒为单位，即在没有活动30分钟后，session将失效
-        session.setAttribute("id",user.getId());
-        session.setAttribute("phone",phone);
         return ResultUtils.success(user);
     }
 

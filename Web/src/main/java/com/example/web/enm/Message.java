@@ -5,6 +5,8 @@ package com.example.web.enm;
  * @Date 2021/7/8 21:20
  * @Version 1.0
  */
+
+//返回的信息
 public enum Message {
     DOT_NO_ID(2, "请不要传入ID，作为参数！"),
     GOODS_NOT_EXIST(5, "该商品不存在或者已下架！"),
@@ -15,8 +17,9 @@ public enum Message {
     ORDERS_NOT_EXIST(7, "订单不存在或者被删除！"),
     RIDER_NOT_EXIST(8, "不存在该骑手！"),
     TOO_Expensive(10, "商品太贵了没钱就别买了！"),
-    USER_ERR_PASS(9, "用户不存在或密码错误！"),
+    USER_ERR_PASS(9, "密码错误！"),
     USER_NOT_EXIST(4, "用户不存在！"),
+    USER_IS_EXIST(12,"用户已注册！"),
     ;
     private Integer code;
     private String message;
