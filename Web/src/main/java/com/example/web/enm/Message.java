@@ -17,7 +17,7 @@ public enum Message {
     ORDERS_NOT_EXIST(7, "订单不存在或者被删除！"),
     RIDER_NOT_EXIST(8, "不存在该骑手！"),
     TOO_Expensive(10, "商品太贵了没钱就别买了！"),
-    USER_ERR_PASS(9, "密码错误！"),
+    USER_ERR_PASS(9, "用户或密码错误！"),
     USER_NOT_EXIST(4, "用户不存在！"),
     USER_IS_EXIST(12,"用户已注册！"),
     ;

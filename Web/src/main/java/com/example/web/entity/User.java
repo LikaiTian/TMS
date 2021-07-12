@@ -109,7 +109,8 @@ public class User
                 ", name='" + name + '\'' +
                 ", Sex='" + Sex + '\'' +
                 ", phone='" + phone + '\'' +
-                ", email='" + email +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
                 '}';
     }
 }
