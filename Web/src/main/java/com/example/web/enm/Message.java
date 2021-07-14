@@ -20,6 +20,9 @@ public enum Message {
     USER_ERR_PASS(9, "用户或密码错误！"),
     USER_NOT_EXIST(4, "用户不存在！"),
     USER_IS_EXIST(12,"用户已注册！"),
+    FILE_UPLOAD_ERROR(13,"文件上传失败！"),
+    EMPLOY_IN_JOB(14,"该员工不属于本公司且处于在职状态，不可查询"),
+    EMPLOY_IS_EXIST(15,"员工已存在！"),
     ;
     private Integer code;
     private String message;

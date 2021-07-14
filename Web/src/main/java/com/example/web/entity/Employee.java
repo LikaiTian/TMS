@@ -17,16 +17,37 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY) //主键生成策略
     private Integer id;
 
+    @Column(columnDefinition = "varchar(255) default ''")
     private String cardId;
+
+    @Column(columnDefinition = "varchar(255) default ''",unique = true)
     private String name;
+
+    @Column(columnDefinition = "varchar(255) default ''")
     private String sex;
-    private Date birth;
-    private Integer age;
+
+    @Column(columnDefinition = "varchar(255) default ''")
+    private String birth;
+/*
+    @Column(columnDefinition = "varchar(255) default ''")
+    private Integer age;*/
+
+    @Column(columnDefinition = "varchar(255) default ''")
     private String phone;
+
+    @Column(columnDefinition = "varchar(255) default ''")
     private String company;
+
+    @Column(columnDefinition = "varchar(255) default ''")
     private String department;
+
+    @Column(columnDefinition = "varchar(255) default ''")
     private String job;
+/*
+
+    @Column(columnDefinition = "varchar(255) default ''")
     private Integer state;  //有工作为1，无工作为0
+*/
 
     public Employee(){}
     public Integer getId() {
@@ -69,22 +90,22 @@ public class Employee {
         this.sex = sex;
     }
 
-    public Date getBirth() {
+    public String getBirth() {
         return birth;
     }
 
-    public void setBirth(Date birth) {
+    public void setBirth(String birth) {
         this.birth = birth;
     }
 
-    public Integer getAge() {
+    /*public Integer getAge() {
         return age;
     }
 
     public void setAge(Integer age) {
         Calendar cal = Calendar.getInstance();
         this.age = cal.get(Calendar.YEAR)-birth.getYear();
-    }
+    }*/
 
     public String getPhone() {
         return phone;
@@ -109,11 +130,4 @@ public class Employee {
         this.job = job;
     }
 
-    public Integer getState() {
-        return state;
-    }
-
-    public void setState(Integer state) {
-        this.state = state;
-    }
 }

@@ -16,10 +16,10 @@ public class Company {
     private Integer id;
 
     @Column(columnDefinition = "varchar(255) default ''")
-    private String companyName;
+    private String companyName;     //公司名
 
     @Column(columnDefinition = "varchar(2550) default ''")
-    private String companyInfo;
+    private String companyInfo;     //公司简介
     public Company(){}
 
     public Integer getId() {

@@ -6,8 +6,12 @@ import com.example.web.entity.User;
 import com.example.web.repository.UserRepository;
 import com.example.web.utils.ResultUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * @Author Memory
@@ -67,14 +71,17 @@ public class UserService {
 
     /**
      * 登录
+     * @param request
      * @param user
      * @return
      */
-    public Result login(User user){
+    public Result login(HttpServletRequest request, User user){
         User user0=userRepository.findByPhoneAndPassword(user.getPhone(),user.getPassword());
         //查不到表示未注册
         if(user0==null){return ResultUtils.error(Message.USER_ERR_PASS);
         }
+        HttpSession session=request.getSession();
+        session.setAttribute("User",user0);
         return ResultUtils.success(user0);
     }
 

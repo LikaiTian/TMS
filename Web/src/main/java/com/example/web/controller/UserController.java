@@ -10,6 +10,11 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
@@ -43,12 +48,12 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/login",method = RequestMethod.GET)
-    public Result login(User user){
+    public Result login(HttpServletRequest request, User user){
         /*User user0 = userService;
         user.setPassword(password);
         user.setPhone(phone);
         System.out.println(user.toString());//new*/
-        return userService.login(user);
+        return userService.login(request,user);
     }
 
     /**
@@ -79,5 +84,25 @@ public class UserController {
     @RequestMapping(value ="/getMessage",method = RequestMethod.GET)
     public User findOne(Integer id){
         return userService.findOne(id);
+    }
+
+    @RequestMapping("/getImg")
+    public void getimg(String address, HttpServletResponse response) throws IOException {
+        try {
+            FileInputStream hFile=new FileInputStream(address);
+            int i=hFile.available();
+            byte data[]=new byte[i];
+            hFile.read(data);
+            hFile.close();
+            response.setContentType("image/*");
+            OutputStream toClient=response.getOutputStream();
+            toClient.write(data);
+            toClient.close();
+        }catch (IOException e) {
+            PrintWriter toClient = response.getWriter();
+            response.setContentType("text/html;charset=gb2312");
+            toClient.write("无法打开图片");
+            toClient.close();
+        }
     }
 }

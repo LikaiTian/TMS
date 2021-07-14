@@ -8,9 +8,9 @@ import java.io.Serializable;
  * @Version 1.0
  */
 public class Result<T> implements Serializable {
-    private Integer code;
-    private String message;
-    private T date; //参数
+    private Integer code;   //编号
+    private String message; //信息
+    private T date;         //参数
 
     public Integer getCode() {
         return code;

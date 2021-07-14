@@ -19,18 +19,18 @@ public class CompanyService {
 
     /**
      * 编辑公司简介
-     * @param companyName
-     * @param companyInfo
+     * @param company
      * @return
      */
-    public Result add(String companyName,String companyInfo){
+    public Result add(Company company){
 
-        Company company=companyRepository.findByCompanyName(companyName);
-        if(company==null){
+        Company company0=companyRepository.findByCompanyName(company.getCompanyName());
+        if(company0==null){
             return ResultUtils.success(companyRepository.save(company));
         }
-        company.setCompanyInfo(companyInfo);
-        return ResultUtils.success(companyRepository.save(company));
+        company0.setCompanyName(company.getCompanyName());
+        company0.setCompanyInfo(company.getCompanyInfo());
+        return ResultUtils.success(companyRepository.save(company0));
     }
     /*public Result edit(Company company){
         return ResultUtils.success(companyRepository.s)

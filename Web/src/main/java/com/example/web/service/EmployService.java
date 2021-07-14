@@ -7,6 +7,7 @@ import com.example.web.entity.User;
 import com.example.web.repository.EmployeeRepository;
 import com.example.web.utils.ResultUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,17 +28,16 @@ public class EmployService {
      * @return
      */
     public Result addOne(Employee employee){
-        /*Employee employee1=employeeRepository.findByCardId(employee.getCardId());
-        if(employee1==null){
-
-        }*/
-        //if(employee.getName())
+        Employee employee1=employeeRepository.findByName(employee.getName());
+        if(employee1!=null){
+            return ResultUtils.error(Message.EMPLOY_IS_EXIST);
+        }
         employeeRepository.save(employee);
-        return ResultUtils.success(employeeRepository.findByCompany(employee.getCompany()));
+        return ResultUtils.success("员工添加成功！");
     }
 
     /**
-     * 更新一个员工信息，更新完以后返回该公司员工列表
+     * 更新一个员工信息，更新完以后返回该公司员工列表,这些员工是这个公司的并且状态为1
      * @param employee
      * @return
      */
@@ -50,11 +50,11 @@ public class EmployService {
             return ResultUtils.error(Message.USER_NOT_EXIST);
         }
         employeeRepository.save(employee);
-        return ResultUtils.success(employeeRepository.findByCompany(employee.getCompany()));
+        return ResultUtils.success("员工修改成功！");
     }
 
     /**
-     * 删除一个员工后，返回该公司员工列表
+     * 删除一个员工后，返回该公司员工列表,这些员工是这个公司的并且状态为1
      * @param employee
      * @return
      */
@@ -67,7 +67,7 @@ public class EmployService {
             return ResultUtils.error(Message.USER_NOT_EXIST);
         }
         employeeRepository.delete(employee);
-        return ResultUtils.success(employeeRepository.findByCompany(employee.getCompany()));
+        return ResultUtils.success("员工删除成功！");
     }
     /**
      * 根据公司找员工信息列表
@@ -86,5 +86,37 @@ public class EmployService {
      */
     public Result findByCompanyAndDepartment(String company,String department){
         return ResultUtils.success(employeeRepository.findByCompanyAndDepartment(company, department));
+    }
+
+    /**
+     * 根据员工id查询它的信息
+     * @param id
+     * @return
+     */
+    public Result finById(Integer id){
+        return ResultUtils.success(employeeRepository.findById(id));
+    }
+
+    /**
+     * 分页查询
+     * @param company
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    public Result findAll(String company,int page, int pageSize) {
+        Employee obj=new Employee();
+        obj.setCompany(company);
+        //创建匹配器
+        ExampleMatcher matcher =ExampleMatcher.matching()
+                .withMatcher("company", ExampleMatcher.GenericPropertyMatchers.exact())
+                .withIgnorePaths("id");
+        //创建实例
+        Example<Employee> ex=Example.of(obj,matcher);
+        Pageable pageable = new PageRequest(page-1,pageSize);
+
+        Page<Employee> kk= employeeRepository.findAll(ex,pageable);
+        List<Employee> list= kk.getContent();
+        return ResultUtils.success(list);
     }
 }

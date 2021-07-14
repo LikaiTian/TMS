@@ -1,5 +1,6 @@
 package com.example.web.controller;
 
+import com.example.web.entity.Company;
 import com.example.web.entity.Result;
 import com.example.web.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,13 +31,12 @@ public class CompanyController {
 
     /**
      * 编辑公司简介
-     * @param companyName
-     * @param companyInfo
+     * @param company
      * @return
      */
     @RequestMapping(value = "/modify",method = RequestMethod.GET)
-    public Result modify(String companyName,String companyInfo){
+    public Result modify(Company company){
 
-        return companyService.add(companyName, companyInfo);
+        return companyService.add(company);
     }
 }

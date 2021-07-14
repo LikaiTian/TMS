@@ -2,6 +2,7 @@ package com.example.web.repository;
 
 import com.example.web.entity.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
@@ -14,7 +15,9 @@ import java.util.List;
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     Employee findById(Integer id);
     Employee findByCardId(String cardId);
-    List<Employee> findByCompany(String company);
+    Employee findByName(String name);
     List<Employee> findByCompanyAndDepartment(String company,String department);
+    List<Employee> findByCompany(String company);
+
     //Employee fin
 }

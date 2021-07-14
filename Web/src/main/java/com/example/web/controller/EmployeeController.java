@@ -1,9 +1,9 @@
 package com.example.web.controller;
 
+
 import com.example.web.entity.Employee;
 import com.example.web.entity.Result;
 import com.example.web.service.EmployService;
-import com.example.web.utils.ResultUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -69,5 +69,40 @@ public class EmployeeController {
     @RequestMapping(value = "/findByDepartment",method = RequestMethod.GET)
     public Result findByCompanyAndDepartment(String company,String department){
         return employService.findByCompanyAndDepartment(company, department);
+    }
+
+    /**
+     * 根据id来查询用户具体信息
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/findById",method = RequestMethod.GET)
+    public  Result findById(Integer id){
+        return employService.finById(id);
+    }
+    /*public String fileUpload(
+            MultipartFile file) {
+        try {
+            String name = file.getOriginalFilename() == null ? "" : file.getOriginalFilename();
+            String path = FileUtil.getTmpPath(Enums.TmpPath.UPLOAD.getCode()) + File.separator + name;
+            File uploadFile = new File(path);
+            file.transferTo(uploadFile);
+            return "文件上传成功";
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "文件上传失败";
+        }
+    }*/
+
+    /**
+     * 分页查询
+     * @param company
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    @RequestMapping(value = "/pageQuery",method = RequestMethod.GET)
+    public Result pageQuery(String company,int page, int pageSize){
+        return employService.findAll(company, page, pageSize);
     }
 }

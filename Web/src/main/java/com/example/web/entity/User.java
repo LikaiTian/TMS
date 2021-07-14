@@ -20,7 +20,7 @@ public class User
     @Column(columnDefinition = "varchar(255) default ''")
     private String companyName; //公司名字
 
-    @Column(columnDefinition = "varchar(255) default ''")
+    @Column(columnDefinition = "varchar(255) default ''",unique = true)
     private String name;    //姓名
 
     @Column(columnDefinition = "varchar(255) default ''")

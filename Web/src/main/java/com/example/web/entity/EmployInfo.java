@@ -1,9 +1,6 @@
 package com.example.web.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * @Author Memory
@@ -16,10 +13,21 @@ public class EmployInfo {
     @Id //主键
     @GeneratedValue(strategy = GenerationType.IDENTITY) //主键生成策略
     private Integer id;
-    private String name;
-    private String companyName;
-    private String workStatus;
-    private String comment;
+
+    @Column(columnDefinition = "varchar(255) default ''")
+    private String name;    //员工名字
+
+    @Column(columnDefinition = "varchar(255) default ''")
+    private String companyName;     //员工所在公司
+
+    @Column(columnDefinition = "varchar(255) default ''")
+    private String workStatus;      //员工工作状态（打分）
+
+    @Column(columnDefinition = "varchar(2555) default ''")
+    private String comment;         //hr对员工的评价
+
+    @Column(columnDefinition = "varchar(255) default ''")
+    private String fileAddress;     //关于员工的工资等各种信息的文件存放的地址
     public EmployInfo(){}
 
     public Integer getId() {
@@ -60,5 +68,13 @@ public class EmployInfo {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public String getFileAddress() {
+        return fileAddress;
+    }
+
+    public void setFileAddress(String fileAddress) {
+        this.fileAddress = fileAddress;
     }
 }
