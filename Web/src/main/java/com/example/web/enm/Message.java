@@ -23,6 +23,11 @@ public enum Message {
     FILE_UPLOAD_ERROR(13,"文件上传失败！"),
     EMPLOY_IN_JOB(14,"该员工不属于本公司且处于在职状态，不可查询"),
     EMPLOY_IS_EXIST(15,"员工已存在！"),
+    PHONE_NOT_LEGAL(16,"电话不合法！"),
+    EMAIL_NOT_LEGAL(17,"邮箱不合法！"),
+    CHARACTER_EMPTY(18,"有空字符串"),
+    HAS_CHINESE(19,"有中文！"),
+    PASSWORD_STYLE(20,"密码必须有字母和数字!"),
     ;
     private Integer code;
     private String message;

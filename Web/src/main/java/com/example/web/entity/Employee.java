@@ -43,8 +43,11 @@ public class Employee {
 
     @Column(columnDefinition = "varchar(255) default ''")
     private String job;
-/*
 
+    @Column(columnDefinition = "varchar(255) default ''")
+    private double salary;
+
+/*
     @Column(columnDefinition = "varchar(255) default ''")
     private Integer state;  //有工作为1，无工作为0
 */
@@ -130,4 +133,11 @@ public class Employee {
         this.job = job;
     }
 
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
 }

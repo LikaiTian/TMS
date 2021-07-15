@@ -59,7 +59,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
         //设置图片静态资源映射文件夹
         registry.addResourceHandler("/data/**")
                 .addResourceLocations("file:C:/Users/memory/Desktop/DotTraining/");
-
     }
 
     @Override

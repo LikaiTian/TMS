@@ -86,7 +86,7 @@ public class UserController {
         return userService.findOne(id);
     }
 
-    @RequestMapping("/getImg")
+    @RequestMapping(value = "/getImg",method = RequestMethod.POST)
     public void getimg(String address, HttpServletResponse response) throws IOException {
         try {
             FileInputStream hFile=new FileInputStream(address);

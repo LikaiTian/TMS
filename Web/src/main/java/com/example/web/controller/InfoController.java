@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.UUID;
+
 /**
  * @Author Memory
  * @Date 2021/7/12 16:52
@@ -46,31 +48,6 @@ public class InfoController {
         return infoService.query(name);
     }
 
-    /*@RequestMapping(value = "/upload",method = RequestMethod.POST)*/
-    /*public Result upload(MultipartFile file){
-        if(file!=null){
-            String fileName=file.getOriginalFilename();
-
-            String code=UUID.randomUUID().toString().replaceAll("-","");
-            String newFileName=code+fileName.substring((fileName.lastIndexOf('.')));
-            String currentDateFolder=(new SimpleDateFormat("/yyyy/MM/dd/")).format(new Date());
-
-            String destFilePath="C:/Users/memory/Desktop/DotTraining/"+ File.separator + currentDateFolder + File.separator + newFileName;
-            try{
-                File destFile=new File(destFilePath);
-                if (!destFile.exists()) {
-                    destFile.mkdirs();
-                }
-                file.transferTo(destFile);
-                return ResultUtils.success(destFilePath);
-            }
-            catch (IOException e){
-
-            }
-        }
-        return ResultUtils.error(Message.FILE_UPLOAD_ERROR);
-    }*/
-
     /**
      * 上传文件
      * @param file
@@ -81,9 +58,11 @@ public class InfoController {
             MultipartFile file) {
         try {
             byte[] bytes = file.getBytes();
-            Path path = Paths.get("/data/"+file.getOriginalFilename());
+            //生成不一样的名字
+            UUID randomUUID = UUID.randomUUID();
+            Path path = Paths.get("/data/"+randomUUID+file.getOriginalFilename());
             Files.write(path,bytes);
-            return ResultUtils.success("文件上传成功");
+            return ResultUtils.success(path);
         } catch (IOException e) {
             e.printStackTrace();
             return ResultUtils.error(Message.FILE_UPLOAD_ERROR);
