@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -120,7 +121,7 @@ public class EmployService {
     }
 
     /**
-     * 分页查询
+     * 公司员工信息的分页查询
      * @param company
      * @param page
      * @param pageSize
@@ -134,6 +135,40 @@ public class EmployService {
                 .withMatcher("company", ExampleMatcher.GenericPropertyMatchers.exact())
                 .withIgnorePaths("id");
         //创建实例
+        return getResult(page, pageSize, obj, matcher);
+    }
+
+    /**
+     * 根据部门来查询员工信息
+     * @param company
+     * @param department
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    public Result findByDepartment(String company,String department,int page, int pageSize){
+        Employee obj=new Employee();
+        obj.setCompany(company);
+        obj.setDepartment(department);
+        //创建匹配器
+        ExampleMatcher matcher =ExampleMatcher.matching()
+                .withMatcher("company", ExampleMatcher.GenericPropertyMatchers.exact())
+                .withMatcher("department",ExampleMatcher.GenericPropertyMatchers.exact())
+                .withIgnorePaths("id");
+        //创建实例
+        return getResult(page, pageSize, obj, matcher);
+    }
+
+    /**
+     * 分页查询
+     * @param page
+     * @param pageSize
+     * @param obj
+     * @param matcher
+     * @return
+     */
+    @NotNull
+    private Result getResult(int page, int pageSize, Employee obj, ExampleMatcher matcher) {
         Example<Employee> ex=Example.of(obj,matcher);
         Pageable pageable = new PageRequest(page-1,pageSize);
 
@@ -142,5 +177,14 @@ public class EmployService {
         return ResultUtils.success(list);
     }
 
+    /**
+     * 根据公司名和employee的名字查询
+     * @param company
+     * @param name
+     * @return
+     */
+    public Result findByName(String company,String name){
+        return ResultUtils.success(employeeRepository.findByCompanyAndName(company, name));
+    }
 
 }

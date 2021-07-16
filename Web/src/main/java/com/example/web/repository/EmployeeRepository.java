@@ -18,6 +18,6 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     Employee findByName(String name);
     List<Employee> findByCompanyAndDepartment(String company,String department);
     List<Employee> findByCompany(String company);
-
+    Employee findByCompanyAndName(String company,String name);
     //Employee fin
 }

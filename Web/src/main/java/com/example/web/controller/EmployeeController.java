@@ -67,7 +67,7 @@ public class EmployeeController {
      * @return
      */
     @RequestMapping(value = "/findByDepartment",method = RequestMethod.GET)
-    public Result findByCompanyAndDepartment(String company,String department){
+    public Result findByCompanyAndDepartment(String company,String department,int page,int pageSize){
         return employService.findByCompanyAndDepartment(company, department);
     }
 
@@ -95,7 +95,7 @@ public class EmployeeController {
     }*/
 
     /**
-     * 分页查询
+     * 根据公司分页查询
      * @param company
      * @param page
      * @param pageSize
@@ -104,5 +104,28 @@ public class EmployeeController {
     @RequestMapping(value = "/pageQuery",method = RequestMethod.GET)
     public Result pageQuery(String company,int page, int pageSize){
         return employService.findAll(company, page, pageSize);
+    }
+
+    /**
+     * 根据部门查询
+     * @param company
+     * @param department
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    @RequestMapping(value = "/departPageQuery",method = RequestMethod.GET)
+    public Result findByDepartment(String company,String department,int page, int pageSize){
+        return employService.findByDepartment(company, department, page, pageSize);
+    }
+    /**
+     * 根据公司名和employee名字查询
+     * @param company
+     * @param name
+     * @return
+     */
+    @RequestMapping(value = "/findByName",method = RequestMethod.GET)
+    public Result findByName(String company,String name){
+        return employService.findByName(company, name);
     }
 }
