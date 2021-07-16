@@ -85,15 +85,15 @@ public class UserService {
                     count = count + 1;
                 }
             }
-            if(count>0){
+            /*if(count>0){
                 return ResultUtils.error(Message.HAS_CHINESE);
             }
-            String t1 = "^[0-9A-Za-z]{2,16}$";
+            String t1 = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,}$\n";
 
             //判断密码是否为数字和字母
             if(!password.matches((t1))){
                 return ResultUtils.error(Message.PASSWORD_STYLE);
-            }
+            }*/
 
         }
 

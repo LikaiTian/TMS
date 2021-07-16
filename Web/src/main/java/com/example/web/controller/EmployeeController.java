@@ -125,7 +125,7 @@ public class EmployeeController {
      * @return
      */
     @RequestMapping(value = "/findByName",method = RequestMethod.GET)
-    public Result findByName(String company,String name){
-        return employService.findByName(company, name);
+    public Result findByName(String company,String name,int page,int pageSize){
+        return employService.findByName(company, name,page,pageSize);
     }
 }

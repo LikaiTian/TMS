@@ -183,8 +183,17 @@ public class EmployService {
      * @param name
      * @return
      */
-    public Result findByName(String company,String name){
-        return ResultUtils.success(employeeRepository.findByCompanyAndName(company, name));
+    public Result findByName(String company,String name,int page,int pageSize){
+        Employee obj=new Employee();
+        obj.setCompany(company);
+        obj.setName(name);
+        //创建匹配器
+        ExampleMatcher matcher =ExampleMatcher.matching()
+                .withMatcher("company", ExampleMatcher.GenericPropertyMatchers.exact())
+                .withMatcher("name",ExampleMatcher.GenericPropertyMatchers.exact())
+                .withIgnorePaths("id");
+        //创建实例
+        return getResult(page, pageSize, obj, matcher);
     }
-
 }
+
