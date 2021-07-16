@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -86,23 +87,14 @@ public class UserController {
         return userService.findOne(id);
     }
 
+    /**
+     * 修改头像
+     * @param id
+     * @param file
+     * @return
+     */
     @RequestMapping(value = "/getImg",method = RequestMethod.POST)
-    public void getimg(String address, HttpServletResponse response) throws IOException {
-        try {
-            FileInputStream hFile=new FileInputStream(address);
-            int i=hFile.available();
-            byte data[]=new byte[i];
-            hFile.read(data);
-            hFile.close();
-            response.setContentType("image/*");
-            OutputStream toClient=response.getOutputStream();
-            toClient.write(data);
-            toClient.close();
-        }catch (IOException e) {
-            PrintWriter toClient = response.getWriter();
-            response.setContentType("text/html;charset=gb2312");
-            toClient.write("无法打开图片");
-            toClient.close();
-        }
+    public Result getImg(Integer id,MultipartFile file){
+        return userService.fileUpload(id,file);
     }
 }

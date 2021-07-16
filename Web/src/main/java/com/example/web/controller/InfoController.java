@@ -49,23 +49,13 @@ public class InfoController {
     }
 
     /**
-     * 上传文件
+     * 员工评价上传附件
      * @param file
      * @return
      */
     @RequestMapping(value = "/upload",method = RequestMethod.POST)
     public Result fileUpload(
             MultipartFile file) {
-        try {
-            byte[] bytes = file.getBytes();
-            //生成不一样的名字
-            UUID randomUUID = UUID.randomUUID();
-            Path path = Paths.get("/data/"+randomUUID+file.getOriginalFilename());
-            Files.write(path,bytes);
-            return ResultUtils.success(path);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return ResultUtils.error(Message.FILE_UPLOAD_ERROR);
-        }
+        return infoService.fileUpload(file);
     }
 }

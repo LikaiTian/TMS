@@ -28,6 +28,8 @@ public enum Message {
     CHARACTER_EMPTY(18,"有空字符串"),
     HAS_CHINESE(19,"有中文！"),
     PASSWORD_STYLE(20,"密码必须有字母和数字!"),
+    CARDID_NOT_LEGAL(21,"卡号不合法!"),
+    IMG_ERROR(22,"头像修改失败！"),
     ;
     private Integer code;
     private String message;

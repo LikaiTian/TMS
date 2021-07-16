@@ -19,6 +19,9 @@ import java.util.List;
  */
 @Service
 public class EmployService {
+
+    //判断电话号码是否合法的正则表达式
+    public final String REG_EXP = "^([0-9]{3}-?[0-9]{8}|[0-9]{4}-?[0-9]{7})$";
     @Autowired
     EmployeeRepository employeeRepository;
 
@@ -32,29 +35,48 @@ public class EmployService {
         if(employee1!=null){
             return ResultUtils.error(Message.EMPLOY_IS_EXIST);
         }
+        //判断电话的合法性
+        if(!employee.getPhone().matches(REG_EXP)){
+            return ResultUtils.error(Message.PHONE_NOT_LEGAL);
+        }
+        //判断卡号是否合法
+        if(!employee.getCardId().matches("^\\d{19}$")){
+            return ResultUtils.error(Message.CARDID_NOT_LEGAL);
+        }
         employeeRepository.save(employee);
         return ResultUtils.success("员工添加成功！");
     }
 
     /**
-     * 更新一个员工信息，更新完以后返回该公司员工列表,这些员工是这个公司的并且状态为1
+     * 更新一个员工信息，更新完以后返回该公司员工列表
      * @param employee
      * @return
      */
     public Result updateOne(Employee employee){
+        //判断是否传过了ID
         if(employee.getId()==null){
             return ResultUtils.error(Message.NO_ID);
         }
+        //判断员工是否存在
         Employee employee0 = employeeRepository.findById(employee.getId());
         if(employee0==null){
             return ResultUtils.error(Message.USER_NOT_EXIST);
         }
+        //判断电话的合法性
+        if(!employee.getPhone().matches(REG_EXP)){
+            return ResultUtils.error(Message.PHONE_NOT_LEGAL);
+        }
+        //判断卡号是否合法
+        if(!employee.getCardId().matches("^\\d{19}$")){
+            return ResultUtils.error(Message.CARDID_NOT_LEGAL);
+        }
+        //成功则保存,返回成功
         employeeRepository.save(employee);
         return ResultUtils.success("员工修改成功！");
     }
 
     /**
-     * 删除一个员工后，返回该公司员工列表,这些员工是这个公司的并且状态为1
+     * 删除一个员工后，返回该公司员工列表
      * @param employee
      * @return
      */

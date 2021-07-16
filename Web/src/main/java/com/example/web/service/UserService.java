@@ -10,9 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -60,6 +66,7 @@ public class UserService {
         //判断密码合法性
         String password=user.getPassword();
         if (password.length() > 0) {
+
             //判断是否有空格字符串
             for (int ww = 0; ww < password.length(); ww++) {
                 String b = password.substring(ww, ww + 1);
@@ -67,6 +74,7 @@ public class UserService {
                     return ResultUtils.error(Message.CHARACTER_EMPTY);
                 }
             }
+
             //判断是否有汉字
             int count = 0;
             String regEx = "[\\u4e00-\\u9fa5]";
@@ -81,6 +89,7 @@ public class UserService {
                 return ResultUtils.error(Message.HAS_CHINESE);
             }
             String t1 = "^[0-9A-Za-z]{2,16}$";
+
             //判断密码是否为数字和字母
             if(!password.matches((t1))){
                 return ResultUtils.error(Message.PASSWORD_STYLE);
@@ -88,6 +97,7 @@ public class UserService {
 
         }
 
+        user.setAddress("/data/3ea6beec64369c2642b92c6726f.png");
         //成功则返回成功信息
         return ResultUtils.success(userRepository.save(user));
     }
@@ -152,5 +162,29 @@ public class UserService {
             return null;
         }
         return user0;
+    }
+
+    /**
+     * 修改头像
+     * @param id
+     * @param file
+     * @return
+     */
+    public Result fileUpload(Integer id,MultipartFile file) {
+        try {
+            byte[] bytes = file.getBytes();
+            //生成不一样的名字
+            UUID randomUUID = UUID.randomUUID();
+            Path path = Paths.get("/data/"+randomUUID+file.getOriginalFilename());
+            Files.write(path,bytes);
+
+            User user=userRepository.findById(id);
+            user.setAddress(path.toString());
+            userRepository.save(user);
+            return ResultUtils.success(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResultUtils.error(Message.IMG_ERROR);
+        }
     }
 }

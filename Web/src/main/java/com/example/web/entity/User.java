@@ -21,10 +21,7 @@ public class User
     private String companyName; //公司名字
 
     @Column(columnDefinition = "varchar(255) default ''",unique = true)
-    private String name;    //姓名
-
-    @Column(columnDefinition = "varchar(255) default ''")
-    private String Sex;     //性别
+    private String address;    //头像地址
 
     @Column(columnDefinition = "varchar(255) default ''",unique = true)
     private String phone;   //联系电话
@@ -60,20 +57,12 @@ public class User
         this.companyName = companyName;
     }
 
-    public String getName() {
-        return name;
+    public String getAddress() {
+        return address;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSex() {
-        return Sex;
-    }
-
-    public void setSex(String sex) {
-        Sex = sex;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getPhone() {
@@ -106,8 +95,7 @@ public class User
                 "id=" + id +
                 ", nickname='" + nickname + '\'' +
                 ", companyName='" + companyName + '\'' +
-                ", name='" + name + '\'' +
-                ", Sex='" + Sex + '\'' +
+                ", name='" + address + '\'' +
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +

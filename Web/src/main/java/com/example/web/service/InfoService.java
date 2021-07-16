@@ -10,8 +10,14 @@ import com.example.web.utils.ResultUtils;
 import com.mysql.jdbc.util.ResultSetUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.xml.ws.Action;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.UUID;
 
 /**
  * @Author Memory
@@ -45,5 +51,25 @@ public class InfoService {
             return ResultUtils.error(Message.EMPLOY_IN_JOB);
         }
         return ResultUtils.success(infoRepository.findByName(name));
+    }
+
+    /**
+     * 员工评价上传附件
+     * @param file
+     * @return
+     */
+    public Result fileUpload(
+            MultipartFile file) {
+        try {
+            byte[] bytes = file.getBytes();
+            //生成不一样的名字
+            UUID randomUUID = UUID.randomUUID();
+            Path path = Paths.get("/data/"+randomUUID+file.getOriginalFilename());
+            Files.write(path,bytes);
+            return ResultUtils.success(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResultUtils.error(Message.FILE_UPLOAD_ERROR);
+        }
     }
 }
