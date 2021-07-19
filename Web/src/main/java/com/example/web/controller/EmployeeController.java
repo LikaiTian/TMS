@@ -128,4 +128,15 @@ public class EmployeeController {
     public Result findByName(String company,String name,int page,int pageSize){
         return employService.findByName(company, name,page,pageSize);
     }
+
+    /**
+     * 返回该部门的各薪资段的人数以及该部门的平均薪资
+     * @param company
+     * @param department
+     * @return
+     */
+    @RequestMapping(value = "/salaryStatus",method = RequestMethod.GET)
+    public Result salaryStatus(String company,String department){
+        return employService.salaryStatus(company, department);
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.web.service;
 
 import com.example.web.enm.Message;
+import com.example.web.entity.DepartmentSalary;
 import com.example.web.entity.Employee;
 import com.example.web.entity.Result;
 import com.example.web.entity.User;
@@ -11,6 +12,8 @@ import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -194,6 +197,44 @@ public class EmployService {
                 .withIgnorePaths("id");
         //创建实例
         return getResult(page, pageSize, obj, matcher);
+    }
+
+    /**
+     * 返回该部门的各薪资段的人数以及该部门的平均薪资
+     * @param company
+     * @param department
+     * @return
+     */
+    public Result salaryStatus(String company,String department){
+        DecimalFormat dataFormat = new DecimalFormat( "0.00");
+        List<Employee> employees= employeeRepository.findByCompanyAndDepartment(company, department);
+        /*List<Double> salary=new ArrayList<Double>();*/
+        double sumSalary=0;
+        int[] salary=new int[4];
+        for(int i=0;i<employees.size();i++){
+            sumSalary+=employees.get(i).getSalary();
+            if(employees.get(i).getSalary()<5000){
+                salary[0]++;
+                continue;
+            }
+            if(employees.get(i).getSalary()>=5000&&employees.get(i).getSalary()<10000){
+                salary[1]++;
+                continue;
+            }
+            if(employees.get(i).getSalary()>=10000&&employees.get(i).getSalary()<15000){
+                salary[2]++;
+                continue;
+            }
+            if(employees.get(i).getSalary()>=15000){
+                salary[3]++;
+                continue;
+            }
+        }
+        double avg=sumSalary/(double)employees.size();
+        double avgSalary=Double.parseDouble(dataFormat.format(avg));
+        DepartmentSalary departmentSalary=new DepartmentSalary(salary,avgSalary);
+
+        return ResultUtils.success(departmentSalary);
     }
 }
 

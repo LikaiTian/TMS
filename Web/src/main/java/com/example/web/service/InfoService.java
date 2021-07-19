@@ -12,8 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.Action;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -70,6 +71,53 @@ public class InfoService {
         } catch (IOException e) {
             e.printStackTrace();
             return ResultUtils.error(Message.FILE_UPLOAD_ERROR);
+        }
+    }
+
+    public Result downLoad(String fileName, HttpServletResponse response){
+        if(fileName==null){
+            return ResultUtils.error(Message.FILE_DOWNLOAD_ERROR);
+        }
+        String path = "/data/";  //这里指定路径在C盘根目录，按需改动即可
+        byte[] buffer = new byte[1024];
+        FileInputStream fis = null;
+        BufferedInputStream bis = null;
+        try {
+            File file = new File(path, fileName);
+            response.setContentType("application/x-download");
+            response.addHeader("Content-Disposition", "attachment;filename=" + fileName);
+            fis = new FileInputStream(file);
+            bis = new BufferedInputStream(fis);
+            OutputStream os = response.getOutputStream();
+            int i = bis.read(buffer);
+            while (i != -1) {
+                os.write(buffer, 0, i);
+                i = bis.read(buffer);
+            }
+        }catch(FileNotFoundException e) {
+            e.printStackTrace();
+            return ResultUtils.error(Message.FILE_DOWNLOAD_ERROR);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResultUtils.error(Message.FILE_DOWNLOAD_ERROR);
+
+        } finally{
+            if (bis != null) {
+                try {
+                    bis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return ResultUtils.success("文件下载成功！");
         }
     }
 }

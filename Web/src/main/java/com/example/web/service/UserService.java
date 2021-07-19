@@ -1,6 +1,8 @@
 package com.example.web.service;
 
 import com.example.web.enm.Message;
+import com.example.web.entity.ConstantUtils;
+import com.example.web.entity.Employee;
 import com.example.web.entity.Result;
 import com.example.web.entity.User;
 import com.example.web.repository.UserRepository;
@@ -147,7 +149,7 @@ public class UserService {
         if(user0==null){return ResultUtils.error(Message.USER_ERR_PASS);
         }
         HttpSession session=request.getSession();
-        session.setAttribute("User",user0);
+        session.setAttribute(ConstantUtils.USER_SESSION_KEY,user0);
         return ResultUtils.success(user0);
     }
 
@@ -181,10 +183,33 @@ public class UserService {
             User user=userRepository.findById(id);
             user.setAddress(path.toString());
             userRepository.save(user);
-            return ResultUtils.success(path);
+            return ResultUtils.success(path.toString());
         } catch (IOException e) {
             e.printStackTrace();
             return ResultUtils.error(Message.IMG_ERROR);
         }
+    }
+
+    /**
+     * 根据电话返回hr信息
+     * @param phone
+     * @return
+     */
+    public Result findByPhone(String phone){
+        return ResultUtils.success(userRepository.findByPhone(phone));
+    }
+
+    /**
+     * 退出
+     * @return
+     */
+    public Result exit(HttpServletRequest request){
+        request.getSession().removeAttribute(ConstantUtils.USER_SESSION_KEY);
+        return ResultUtils.success(Message.EXIT_SUCCESS);
+    }
+
+    public Result findAddress(int id){
+        User user=userRepository.findById(id);
+        return ResultUtils.success(user.getAddress());
     }
 }

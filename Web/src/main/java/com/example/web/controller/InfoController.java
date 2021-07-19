@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -57,5 +58,16 @@ public class InfoController {
     public Result fileUpload(
             MultipartFile file) {
         return infoService.fileUpload(file);
+    }
+
+    /**
+     * 下载文件
+     * @param fileName
+     * @param response
+     * @return
+     */
+    @RequestMapping(value = "/download", method = RequestMethod.GET)
+    public Result downLoad(String fileName, HttpServletResponse response){
+        return infoService.downLoad(fileName,response);
     }
 }

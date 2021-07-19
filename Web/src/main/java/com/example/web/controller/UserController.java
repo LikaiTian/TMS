@@ -1,5 +1,6 @@
 package com.example.web.controller;
 
+import com.example.web.entity.Employee;
 import com.example.web.entity.Result;
 import com.example.web.entity.User;
 import com.example.web.repository.UserRepository;
@@ -96,5 +97,25 @@ public class UserController {
     @RequestMapping(value = "/getImg",method = RequestMethod.POST)
     public Result getImg(Integer id,MultipartFile file){
         return userService.fileUpload(id,file);
+    }
+
+    /**
+     * 通过电话返回hr信息
+     * @param phone
+     * @return
+     */
+    @RequestMapping(value = "/findByPhone",method = RequestMethod.GET)
+    public Result findByPhone(String phone){
+        return userService.findByPhone(phone);
+    }
+
+    /**
+     * 根据id找到头像所存地址
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/findAddress",method = RequestMethod.GET)
+    public Result findAddress(int id){
+         return userService.findAddress(id);
     }
 }
