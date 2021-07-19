@@ -139,4 +139,14 @@ public class EmployeeController {
     public Result salaryStatus(String company,String department){
         return employService.salaryStatus(company, department);
     }
+
+    /**
+     * 返回该部门的各薪资段的人数以及该部门的平均薪资
+     * @param company
+     * @return
+     */
+    @RequestMapping(value = "/companySalary",method = RequestMethod.GET)
+    public Result companySalary(String company){
+        return employService.companySalary(company);
+    }
 }

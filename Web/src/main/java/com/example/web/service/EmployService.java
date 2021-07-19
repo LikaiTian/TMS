@@ -1,10 +1,7 @@
 package com.example.web.service;
 
 import com.example.web.enm.Message;
-import com.example.web.entity.DepartmentSalary;
-import com.example.web.entity.Employee;
-import com.example.web.entity.Result;
-import com.example.web.entity.User;
+import com.example.web.entity.*;
 import com.example.web.repository.EmployeeRepository;
 import com.example.web.utils.ResultUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -235,6 +232,59 @@ public class EmployService {
         DepartmentSalary departmentSalary=new DepartmentSalary(salary,avgSalary);
 
         return ResultUtils.success(departmentSalary);
+    }
+
+    /**
+     * 分析该公司的各部门平均薪资情况和人员分布情况
+     * @param company
+     * @return
+     */
+    public Result companySalary(String company){
+        DecimalFormat dataFormat = new DecimalFormat( "0.00");
+        List<Employee> employeeList=employeeRepository.findByCompany(company);
+        int[] staff=new int[5];         //统计人员分布情况
+        double[] salary=new double[5];  //每个部门的平均薪资
+
+        for(int i=0;i<employeeList.size();i++){
+            switch(employeeList.get(i).getDepartment()){
+                case "项目部":
+                    staff[0]++;
+                    salary[0]+=employeeList.get(i).getSalary();
+                    break;
+                case "人事部":
+                    staff[1]++;
+                    salary[1]+=employeeList.get(i).getSalary();
+                    break;
+
+                case "财务部":
+                    staff[2]++;
+                    salary[2]+=employeeList.get(i).getSalary();
+                    break;
+
+                case"技术部":
+                    staff[3]++;
+                    salary[3]+=employeeList.get(i).getSalary();
+                    break;
+
+                case "销售部":
+                    staff[4]++;
+                    salary[4]+=employeeList.get(i).getSalary();
+
+                    break;
+            }
+        }
+        for(int i=0;i<5;i++){
+            if(staff[i]==0){
+                salary[i]=Double.parseDouble(dataFormat.format(salary[i]));
+                continue;
+            }
+            salary[i]/=staff[i];
+            salary[i]=Double.parseDouble(dataFormat.format(salary[i]));
+        }
+        CompanySalary companySalary=new CompanySalary();
+        companySalary.setSalary(salary);
+        companySalary.setEmployees(staff);
+        return ResultUtils.success(companySalary);
     }
 }
 
