@@ -22,12 +22,22 @@ public class EmployeeController {
 
     /**
      * 新增一个员工
-     * @param employee
+     * @param cardId
+     * @param name
+     * @param sex
+     * @param birth
+     * @param phone
+     * @param company
+     * @param department
+     * @param job
+     * @param salary
      * @return
      */
     @RequestMapping(value = "/add",method = RequestMethod.GET)
-    public Result add(Employee employee){
-        return employService.addOne(employee);
+    public Result add(String cardId,String name,String sex,
+                      String birth,String phone,String company,
+                      String department,String job,String salary){
+        return employService.addOne(cardId, name, sex, birth, phone, company, department, job, salary);
     }
 
     /**

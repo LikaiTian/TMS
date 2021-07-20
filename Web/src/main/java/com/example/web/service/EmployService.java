@@ -27,23 +27,44 @@ public class EmployService {
     EmployeeRepository employeeRepository;
 
     /**
-     *添加员工后返回该员工所在公司的员工列表
-     * @param employee
+     * 添加员工
+     * @param cardId
+     * @param name
+     * @param sex
+     * @param birth
+     * @param phone
+     * @param company
+     * @param department
+     * @param job
+     * @param salary
      * @return
      */
-    public Result addOne(Employee employee){
-        Employee employee1=employeeRepository.findByName(employee.getName());
+    public Result addOne(String cardId,String name,String sex,
+                         String birth,String phone,String company,
+                         String department,String job,String salary){
+        Employee employee1=employeeRepository.findByName(name);
         if(employee1!=null){
             return ResultUtils.error(Message.EMPLOY_IS_EXIST);
         }
         //判断电话的合法性
-        if(!employee.getPhone().matches(REG_EXP)){
+        if(!phone.matches(REG_EXP)){
             return ResultUtils.error(Message.PHONE_NOT_LEGAL);
         }
         //判断卡号是否合法
-        if(!employee.getCardId().matches("^\\d{19}$")){
+        if(!cardId.matches("^\\d{19}$")){
             return ResultUtils.error(Message.CARDID_NOT_LEGAL);
         }
+        Employee employee=new Employee();
+        employee.setName(name);
+        employee.setDepartment(department);
+        employee.setBirth(birth);
+        employee.setCardId(cardId);
+        employee.setJob(job);
+        employee.setSalary(Double.valueOf(salary));
+        employee.setSex(sex);
+        employee.setPhone(phone);
+        employee.setCompany(company);
+
         employeeRepository.save(employee);
         return ResultUtils.success("员工添加成功！");
     }

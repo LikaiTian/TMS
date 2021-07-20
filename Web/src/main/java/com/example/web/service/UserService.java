@@ -99,7 +99,7 @@ public class UserService {
 
         }
 
-        user.setAddress("/data/3ea6beec64369c2642b92c6726f.png");
+        user.setAddress("http://1.15.24.31:8080/pictures/03d318ca-891d-4c0f-b649-0d908f35de975ed503a7d75b10e2.jpg");
         //成功则返回成功信息
         return ResultUtils.success(userRepository.save(user));
     }
@@ -181,9 +181,9 @@ public class UserService {
             Files.write(path,bytes);
 
             User user=userRepository.findById(id);
-            user.setAddress(path.toString());
+            user.setAddress("http://1.15.24.31:8080/pictures/"+randomUUID+file.getOriginalFilename());
             userRepository.save(user);
-            return ResultUtils.success(path.toString());
+            return ResultUtils.success("http://1.15.24.31:8080/pictures/"+randomUUID+file.getOriginalFilename());
         } catch (IOException e) {
             e.printStackTrace();
             return ResultUtils.error(Message.IMG_ERROR);
