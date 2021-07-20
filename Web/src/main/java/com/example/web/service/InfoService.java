@@ -9,15 +9,18 @@ import com.example.web.repository.InfoRepository;
 import com.example.web.utils.ResultUtils;
 import com.mysql.jdbc.util.ResultSetUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.constraints.NotNull;
 import javax.xml.ws.Action;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -42,16 +45,55 @@ public class InfoService {
     }
 
     /**
-     * 查询处于离职状态的某员工在以往公司的评价信息
-     * @param name
+     * 本公司
+     * @param company
+     * @param page
+     * @param pageSize
      * @return
      */
-    public Result query(String name){
-        Employee employee=employeeRepository.findByName(name);
-        if(employee!=null){
-            return ResultUtils.error(Message.EMPLOY_IN_JOB);
-        }
-        return ResultUtils.success(infoRepository.findByName(name));
+    public Result myCompany(String company,int page, int pageSize){
+        EmployInfo obj=new EmployInfo();
+        obj.setCompanyName(company);
+        ExampleMatcher matcher =ExampleMatcher.matching()
+                .withMatcher("companyName", ExampleMatcher.GenericPropertyMatchers.exact())
+                .withIgnorePaths("id");
+        //创建实例
+        return getResult(page, pageSize, obj, matcher);
+    }
+
+    /**
+     * 查询处于离职状态的某员工在以往公司的评价信息
+     * @param name
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    public Result query(String name,int page, int pageSize){
+        EmployInfo obj=new EmployInfo();
+        obj.setName(name);
+        ExampleMatcher matcher =ExampleMatcher.matching()
+                .withMatcher("name", ExampleMatcher.GenericPropertyMatchers.exact())
+                .withIgnorePaths("id");
+        //创建实例
+        return getResult(page, pageSize, obj, matcher);
+    }
+
+    /**
+     * 分页查询
+     * @param page
+     * @param pageSize
+     * @param obj
+     * @param matcher
+     * @return
+     */
+    @NotNull
+    private Result getResult(int page, int pageSize, EmployInfo obj, ExampleMatcher matcher) {
+        Example<EmployInfo> ex=Example.of(obj,matcher);
+        Pageable pageable = new PageRequest(page-1,pageSize);
+
+        Page<EmployInfo> kk= infoRepository.findAll(ex,pageable);
+        List<EmployInfo> list= kk.getContent();
+        return ResultUtils.success(list);
     }
 
     /**

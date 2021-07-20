@@ -40,13 +40,25 @@ public class InfoController {
     }
 
     /**
+     * 查找本公司员工的评价
+     * @param company
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    @RequestMapping(value = "/queryCompany",method = RequestMethod.GET)
+    public Result myCompany(String company,int page, int pageSize){
+        return infoService.myCompany(company, page, pageSize);
+    }
+
+    /**
      * 查询处于离职状态的某员工在以往公司的评价信息
      * @param name
      * @return
      */
     @RequestMapping(value = "/query",method = RequestMethod.GET)
-    public Result query(String name){
-        return infoService.query(name);
+    public Result query(String name,int page, int pageSize){
+        return infoService.query(name,page,pageSize);
     }
 
     /**

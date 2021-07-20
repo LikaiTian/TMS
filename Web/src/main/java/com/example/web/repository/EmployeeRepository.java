@@ -1,6 +1,10 @@
 package com.example.web.repository;
 
+import com.example.web.entity.EmployInfo;
 import com.example.web.entity.Employee;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
@@ -19,5 +23,6 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     List<Employee> findByCompanyAndDepartment(String company,String department);
     List<Employee> findByCompany(String company);
     Employee findByCompanyAndName(String company,String name);
+
     //Employee fin
 }

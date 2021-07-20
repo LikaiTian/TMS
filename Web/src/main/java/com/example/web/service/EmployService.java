@@ -133,7 +133,8 @@ public class EmployService {
         //创建匹配器
         ExampleMatcher matcher =ExampleMatcher.matching()
                 .withMatcher("company", ExampleMatcher.GenericPropertyMatchers.exact())
-                .withIgnorePaths("id");
+                .withIgnorePaths("id")
+                .withIgnorePaths("salary");
         //创建实例
         return getResult(page, pageSize, obj, matcher);
     }
@@ -154,7 +155,8 @@ public class EmployService {
         ExampleMatcher matcher =ExampleMatcher.matching()
                 .withMatcher("company", ExampleMatcher.GenericPropertyMatchers.exact())
                 .withMatcher("department",ExampleMatcher.GenericPropertyMatchers.exact())
-                .withIgnorePaths("id");
+                .withIgnorePaths("id")
+                .withIgnorePaths("salary");
         //创建实例
         return getResult(page, pageSize, obj, matcher);
     }
@@ -191,6 +193,7 @@ public class EmployService {
         ExampleMatcher matcher =ExampleMatcher.matching()
                 .withMatcher("company", ExampleMatcher.GenericPropertyMatchers.exact())
                 .withMatcher("name",ExampleMatcher.GenericPropertyMatchers.exact())
+                .withIgnorePaths("salary")
                 .withIgnorePaths("id");
         //创建实例
         return getResult(page, pageSize, obj, matcher);
