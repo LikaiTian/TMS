@@ -44,6 +44,19 @@ public class InfoService {
         return ResultUtils.success(infoRepository.save(employInfo));
     }
 
+
+    /**
+     * 找到最新的员工评价
+     * @param name
+     * @return
+     */
+    public Result findOne(String name){
+        List<EmployInfo> list=infoRepository.findByName(name);
+        if(list==null){
+            return ResultUtils.error(Message.EMPLOY_NOT_COMMENT);
+        }
+        return ResultUtils.success(list.get(list.size()-1));
+    }
     /**
      * 本公司
      * @param company

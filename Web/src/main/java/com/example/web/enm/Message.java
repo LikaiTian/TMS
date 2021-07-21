@@ -32,6 +32,7 @@ public enum Message {
     IMG_ERROR(22,"头像修改失败！"),
     EXIT_SUCCESS(23,"退出成功！"),
     FILE_DOWNLOAD_ERROR(24,"文件下载失败！"),
+    EMPLOY_NOT_COMMENT(25,"未对该员工进行评价！"),
     ;
     private Integer code;
     private String message;

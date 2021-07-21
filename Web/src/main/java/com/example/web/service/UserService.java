@@ -203,7 +203,11 @@ public class UserService {
         return ResultUtils.success(Message.EXIT_SUCCESS);
     }
 
-
+    /**
+     * 返回头像地址
+     * @param id
+     * @return
+     */
     public Result findAddress(int id){
         User user=userRepository.findById(id);
         return ResultUtils.success(user.getAddress());

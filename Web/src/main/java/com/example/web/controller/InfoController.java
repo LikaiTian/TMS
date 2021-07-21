@@ -52,6 +52,16 @@ public class InfoController {
     }
 
     /**
+     * 找到最新的员工评价
+     * @param name
+     * @return
+     */
+    @RequestMapping(value = "/findNew",method = RequestMethod.GET)
+    public Result findOne(String name){
+        return infoService.findOne(name);
+    }
+
+    /**
      * 查询处于离职状态的某员工在以往公司的评价信息
      * @param name
      * @return
