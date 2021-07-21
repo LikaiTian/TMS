@@ -24,18 +24,17 @@ public class TipService {
      * 添加操作信息
      * @param userId
      * @param message
-     * @param time
      * @return
      */
-    public Result add(String userId,String message,String time){
-        SimpleDateFormat sdf = new SimpleDateFormat( " yyyy-MM-dd HH-mm-ss" );
+    public Result add(String userId,String message){
+        SimpleDateFormat sdf = new SimpleDateFormat( " yyyy-MM-dd HH:mm:ss" );
 
         Tip tip=new Tip();
-        tip.setTime(time);    //设置时间
+        tip.setTime(sdf.format(new Date()));    //设置时间
         tip.setMessage(message);                //设置消息
         tip.setUserId(Integer.valueOf(userId)); //设置用户id
         tipRepository.save(tip);
-        return ResultUtils.success("消息保存成功啦！");
+        return ResultUtils.success("消息保存成功了！");
     }
 
     /**

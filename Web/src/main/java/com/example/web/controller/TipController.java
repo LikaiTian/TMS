@@ -22,12 +22,11 @@ public class TipController {
      * 添加操作信息
      * @param userId
      * @param message
-     * @param time
      * @return
      */
     @RequestMapping(value = "/add",method = RequestMethod.GET)
-    public Result add(String userId, String message,String time){
-        return tipService.add(userId, message,time);
+    public Result add(String userId, String message){
+        return tipService.add(userId, message);
     }
 
     /**
