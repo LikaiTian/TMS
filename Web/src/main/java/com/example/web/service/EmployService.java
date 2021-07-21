@@ -70,35 +70,55 @@ public class EmployService {
     }
 
     /**
-     * 更新一个员工信息，更新完以后返回该公司员工列表
-     * @param employee
+     * 更新一个员工信息
+     * @param cardId
+     * @param name
+     * @param sex
+     * @param birth
+     * @param phone
+     * @param company
+     * @param department
+     * @param job
+     * @param salary
      * @return
      */
-    public Result updateOne(Employee employee){
+    public Result update(String id,String cardId,String name,String sex,
+                         String birth,String phone,String company,
+                         String department,String job,String salary){
         //判断是否传过了ID
-        if(employee.getId()==null){
+        int uid=Integer.valueOf(id);
+        if(uid==0){
             return ResultUtils.error(Message.NO_ID);
         }
         //判断员工是否存在
-        Employee employee0 = employeeRepository.findById(employee.getId());
-        if(employee0==null){
+        Employee employee = employeeRepository.findById(uid);
+        if(employee==null){
             return ResultUtils.error(Message.USER_NOT_EXIST);
         }
         //判断电话的合法性
-        if(!employee.getPhone().matches(REG_EXP)){
+        if(!phone.matches(REG_EXP)){
             return ResultUtils.error(Message.PHONE_NOT_LEGAL);
         }
         //判断卡号是否合法
-        if(!employee.getCardId().matches("^\\d{19}$")){
+        if(!cardId.matches("^\\d{19}$")){
             return ResultUtils.error(Message.CARDID_NOT_LEGAL);
         }
         //成功则保存,返回成功
+        employee.setName(name);
+        employee.setDepartment(department);
+        employee.setBirth(birth);
+        employee.setCardId(cardId);
+        employee.setJob(job);
+        employee.setSalary(Double.valueOf(salary));
+        employee.setSex(sex);
+        employee.setPhone(phone);
+        employee.setCompany(company);
         employeeRepository.save(employee);
         return ResultUtils.success("员工修改成功！");
     }
 
     /**
-     * 删除一个员工后，返回该公司员工列表
+     * 删除一个员工
      * @param employee
      * @return
      */
@@ -113,6 +133,7 @@ public class EmployService {
         employeeRepository.delete(employee);
         return ResultUtils.success("员工删除成功！");
     }
+
     /**
      * 根据公司找员工信息列表
      * @param company
@@ -122,18 +143,9 @@ public class EmployService {
         return ResultUtils.success(employeeRepository.findByCompany(company));
     }
 
-    /**
-     * 根据公司和部门查找员工信息列表
-     * @param company
-     * @param department
-     * @return
-     */
-    public Result findByCompanyAndDepartment(String company,String department){
-        return ResultUtils.success(employeeRepository.findByCompanyAndDepartment(company, department));
-    }
 
     /**
-     * 根据员工id查询它的信息
+     * 根据员工id查询个人信息
      * @param id
      * @return
      */
@@ -161,7 +173,7 @@ public class EmployService {
     }
 
     /**
-     * 根据部门来查询员工信息
+     * 部门员工信息的分页查询
      * @param company
      * @param department
      * @param page
@@ -183,7 +195,7 @@ public class EmployService {
     }
 
     /**
-     * 分页查询
+     * 分页查询小接口
      * @param page
      * @param pageSize
      * @param obj
@@ -201,7 +213,7 @@ public class EmployService {
     }
 
     /**
-     * 根据公司名和employee的名字查询
+     * 根据公司名和员工的名字查询员工信息
      * @param company
      * @param name
      * @return
@@ -309,6 +321,11 @@ public class EmployService {
         companySalary.setSalary(salary);
         companySalary.setEmployees(staff);
         return ResultUtils.success(companySalary);
+    }
+
+
+    public Result findByCompanyAndDepartment(String company, String department) {
+        return ResultUtils.success(employeeRepository.findByCompanyAndDepartment(company, department));
     }
 }
 

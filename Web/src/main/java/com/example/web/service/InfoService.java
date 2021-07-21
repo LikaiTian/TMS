@@ -109,7 +109,7 @@ public class InfoService {
             UUID randomUUID = UUID.randomUUID();
             Path path = Paths.get("/data/"+randomUUID+file.getOriginalFilename());
             Files.write(path,bytes);
-            return ResultUtils.success(path);
+            return ResultUtils.success("http://1.15.24.31:8080/pictures/"+randomUUID+file.getOriginalFilename());
         } catch (IOException e) {
             e.printStackTrace();
             return ResultUtils.error(Message.FILE_UPLOAD_ERROR);

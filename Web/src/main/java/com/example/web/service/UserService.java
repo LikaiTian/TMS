@@ -1,17 +1,12 @@
 package com.example.web.service;
 
 import com.example.web.enm.Message;
-import com.example.web.entity.ConstantUtils;
-import com.example.web.entity.Employee;
 import com.example.web.entity.Result;
 import com.example.web.entity.User;
 import com.example.web.repository.UserRepository;
 import com.example.web.utils.ResultUtils;
-import com.mysql.jdbc.util.ResultSetUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -149,7 +144,7 @@ public class UserService {
         if(user0==null){return ResultUtils.error(Message.USER_ERR_PASS);
         }
         HttpSession session=request.getSession();
-        session.setAttribute(ConstantUtils.USER_SESSION_KEY,user0);
+        session.setAttribute("user",user0);
         return ResultUtils.success(user0);
     }
 
@@ -204,9 +199,10 @@ public class UserService {
      * @return
      */
     public Result exit(HttpServletRequest request){
-        request.getSession().removeAttribute(ConstantUtils.USER_SESSION_KEY);
+        request.getSession().removeAttribute("user");
         return ResultUtils.success(Message.EXIT_SUCCESS);
     }
+
 
     public Result findAddress(int id){
         User user=userRepository.findById(id);

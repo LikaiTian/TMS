@@ -42,12 +42,23 @@ public class EmployeeController {
 
     /**
      * 更新一个员工信息
-     * @param employee
+     * @param id
+     * @param cardId
+     * @param name
+     * @param sex
+     * @param birth
+     * @param phone
+     * @param company
+     * @param department
+     * @param job
+     * @param salary
      * @return
      */
     @RequestMapping(value = "/modify",method = RequestMethod.GET)
-    public Result update(Employee employee){
-        return employService.updateOne(employee);
+    public Result update(String id,String cardId,String name,String sex,
+                         String birth,String phone,String company,
+                         String department,String job,String salary){
+        return employService.update(id, cardId, name, sex, birth, phone, company, department, job, salary);
     }
 
     /**
