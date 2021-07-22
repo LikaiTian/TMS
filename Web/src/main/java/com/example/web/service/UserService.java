@@ -101,18 +101,26 @@ public class UserService {
 
     /**
      * 更新hr信息
-     * @param user
+     * @param id
+     * @param nickname
+     * @param companyName
+     * @param phone
+     * @param email
      * @return
      */
-    public Result UpdateOne(User user){
-        if(user.getId()==null){
+    public Result UpdateOne(String id,String nickname,String companyName,String phone,String email){
+        /*if(user.getId()==null){
             return ResultUtils.error(Message.NO_ID);
-        }
-        User user0 = userRepository.findById(user.getId());
+        }*/
+        User user0 = userRepository.findById(Integer.valueOf(id));
         if(user0==null){
             return ResultUtils.error(Message.USER_NOT_EXIST);
         }
-        return ResultUtils.success(userRepository.save(user));
+        user0.setNickname(nickname);
+        user0.setCompanyName(companyName);
+        user0.setPhone(phone);
+        user0.setEmail(email);
+        return ResultUtils.success(userRepository.save(user0));
     }
 
     /**
@@ -153,8 +161,8 @@ public class UserService {
      * @param id
      * @return
      */
-    public User findOne(Integer id){
-        User user0 = userRepository.findById(id);
+    public User findOne(String id){
+        User user0 = userRepository.findById(Integer.valueOf(id));
         if(user0==null){
             return null;
         }

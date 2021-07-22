@@ -5,6 +5,10 @@ package com.example.web.entity;
  * @Date 2021/7/19 14:32
  * @Version 1.0
  */
+
+/**
+ * 作为统计全公司数据的工具
+ */
 public class CompanySalary {
     int[] employees;    //各部门人员分布
     double[] salary;    //各部门薪资对比情况

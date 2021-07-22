@@ -18,34 +18,34 @@ public class Employee {
     private Integer id;
 
     @Column(columnDefinition = "varchar(255) default ''")
-    private String cardId;
+    private String cardId;  //卡号
 
     @Column(columnDefinition = "varchar(255) default ''",unique = true)
-    private String name;
+    private String name;    //名字
 
     @Column(columnDefinition = "varchar(255) default ''")
-    private String sex;
+    private String sex;     //性别
 
     @Column(columnDefinition = "varchar(255) default ''")
-    private String birth;
+    private String birth;   //出生日期
 /*
     @Column(columnDefinition = "varchar(255) default ''")
     private Integer age;*/
 
     @Column(columnDefinition = "varchar(255) default ''")
-    private String phone;
+    private String phone;   //电话
 
     @Column(columnDefinition = "varchar(255) default ''")
-    private String company;
+    private String company;  //所在公司
 
     @Column(columnDefinition = "varchar(255) default ''")
-    private String department;
+    private String department;  //所在部门
 
     @Column(columnDefinition = "varchar(255) default ''")
-    private String job;
+    private String job;     //工作
 
     @Column(columnDefinition = "varchar(255) default ''")
-    private double salary;
+    private double salary;  //薪资
 
 /*
     @Column(columnDefinition = "varchar(255) default ''")

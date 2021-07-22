@@ -60,12 +60,16 @@ public class UserController {
 
     /**
      * 修改个人信息
-     * @param user
+     * @param id
+     * @param nickname
+     * @param companyName
+     * @param phone
+     * @param email
      * @return
      */
     @RequestMapping(value = "/modify",method = RequestMethod.GET)
-    public Result UpdateOne(User user){
-        return userService.UpdateOne(user);
+    public Result UpdateOne(String id,String nickname,String companyName,String phone,String email){
+        return userService.UpdateOne(id, nickname, companyName, phone, email);
     }
 
     /**
@@ -84,7 +88,7 @@ public class UserController {
      * @return
      */
     @RequestMapping(value ="/getMessage",method = RequestMethod.GET)
-    public User findOne(Integer id){
+    public User findOne(String id){
         return userService.findOne(id);
     }
 

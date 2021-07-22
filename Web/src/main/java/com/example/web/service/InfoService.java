@@ -44,6 +44,15 @@ public class InfoService {
         return ResultUtils.success(infoRepository.save(employInfo));
     }
 
+    /**
+     * 总的评价数量
+     * @param company
+     * @return
+     */
+    public Result num(String company){
+        List<EmployInfo> list=infoRepository.findByCompanyName(company);
+        return ResultUtils.success(list.size());
+    }
 
     /**
      * 找到最新的员工评价

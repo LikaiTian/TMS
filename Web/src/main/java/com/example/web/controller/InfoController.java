@@ -40,6 +40,15 @@ public class InfoController {
     }
 
     /**
+     * 返回评价总数
+     * @param company
+     * @return
+     */
+    @RequestMapping(value = "/num",method = RequestMethod.GET)
+    public Result num(String company){
+        return infoService.num(company);
+    }
+    /**
      * 查找本公司员工的评价
      * @param company
      * @param page
@@ -67,8 +76,8 @@ public class InfoController {
      * @return
      */
     @RequestMapping(value = "/query",method = RequestMethod.GET)
-    public Result query(String name,int page, int pageSize){
-        return infoService.query(name,page,pageSize);
+        public Result query(String name,int page, int pageSize){
+            return infoService.query(name,page,pageSize);
     }
 
     /**

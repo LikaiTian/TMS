@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
  * @Date 2021/7/10 23:39
  * @Version 1.0
  */
+@Repository("emJpaRepository")
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     Employee findById(Integer id);
     Employee findByCardId(String cardId);

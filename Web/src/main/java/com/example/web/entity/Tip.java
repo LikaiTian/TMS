@@ -15,13 +15,13 @@ public class Tip {
     private Integer id;
 
     @Column(columnDefinition = "varchar(255) default ''")
-    private Integer userId;
+    private Integer userId;     //产生该消息的hr的id
 
     @Column(columnDefinition = "varchar(255) default ''")
-    private String time;
+    private String time;        //该消息产生的时间
 
     @Column(columnDefinition = "varchar(255) default ''")
-    private String message;
+    private String message;     //该消息的具体内容
 
     public Integer getId() {
         return id;
