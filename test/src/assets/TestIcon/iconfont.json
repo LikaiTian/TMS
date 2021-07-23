@@ -1,0 +1,191 @@
+{
+  "id": "2666012",
+  "name": "Web",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "4922508",
+      "name": "返回",
+      "font_class": "back",
+      "unicode": "e670",
+      "unicode_decimal": 58992
+    },
+    {
+      "icon_id": "594383",
+      "name": "找回密码",
+      "font_class": "zhaohuimima",
+      "unicode": "e63f",
+      "unicode_decimal": 58943
+    },
+    {
+      "icon_id": "5359611",
+      "name": "获取验证码",
+      "font_class": "huoquyanzhengma",
+      "unicode": "e629",
+      "unicode_decimal": 58921
+    },
+    {
+      "icon_id": "11495053",
+      "name": "忘记密码",
+      "font_class": "wangjimima",
+      "unicode": "e66b",
+      "unicode_decimal": 58987
+    },
+    {
+      "icon_id": "10742443",
+      "name": "离职申请",
+      "font_class": "lizhishenqing",
+      "unicode": "e692",
+      "unicode_decimal": 59026
+    },
+    {
+      "icon_id": "14623985",
+      "name": "评价",
+      "font_class": "pingjia",
+      "unicode": "e6c8",
+      "unicode_decimal": 59080
+    },
+    {
+      "icon_id": "19739015",
+      "name": "保存",
+      "font_class": "baocun",
+      "unicode": "f1aa",
+      "unicode_decimal": 61866
+    },
+    {
+      "icon_id": "21533993",
+      "name": "评价",
+      "font_class": "pingjia1",
+      "unicode": "e62f",
+      "unicode_decimal": 58927
+    },
+    {
+      "icon_id": "21533996",
+      "name": "修改",
+      "font_class": "xiugai",
+      "unicode": "e630",
+      "unicode_decimal": 58928
+    },
+    {
+      "icon_id": "20587108",
+      "name": "加载",
+      "font_class": "jiazai",
+      "unicode": "e6bf",
+      "unicode_decimal": 59071
+    },
+    {
+      "icon_id": "8327173",
+      "name": "email",
+      "font_class": "email",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
+      "icon_id": "17408074",
+      "name": "公司",
+      "font_class": "gongsi",
+      "unicode": "e617",
+      "unicode_decimal": 58903
+    },
+    {
+      "icon_id": "18368451",
+      "name": "电 话01",
+      "font_class": "dianhua01",
+      "unicode": "e68e",
+      "unicode_decimal": 59022
+    },
+    {
+      "icon_id": "7738373",
+      "name": "重置",
+      "font_class": "zhongzhi",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    },
+    {
+      "icon_id": "14560698",
+      "name": "提交",
+      "font_class": "tijiao",
+      "unicode": "e628",
+      "unicode_decimal": 58920
+    },
+    {
+      "icon_id": "21205143",
+      "name": "注册",
+      "font_class": "zhuce",
+      "unicode": "e61e",
+      "unicode_decimal": 58910
+    },
+    {
+      "icon_id": "435924",
+      "name": "卡路里",
+      "font_class": "qialuli",
+      "unicode": "e7b4",
+      "unicode_decimal": 59316
+    },
+    {
+      "icon_id": "947482",
+      "name": "商品",
+      "font_class": "shangpin",
+      "unicode": "e648",
+      "unicode_decimal": 58952
+    },
+    {
+      "icon_id": "975307",
+      "name": "登录",
+      "font_class": "denglu",
+      "unicode": "e62e",
+      "unicode_decimal": 58926
+    },
+    {
+      "icon_id": "6489735",
+      "name": "食物",
+      "font_class": "shiwu",
+      "unicode": "e691",
+      "unicode_decimal": 59025
+    },
+    {
+      "icon_id": "14154140",
+      "name": "运动",
+      "font_class": "51",
+      "unicode": "e6a4",
+      "unicode_decimal": 59044
+    },
+    {
+      "icon_id": "14488452",
+      "name": "书",
+      "font_class": "ziyuan22",
+      "unicode": "e778",
+      "unicode_decimal": 59256
+    },
+    {
+      "icon_id": "14559325",
+      "name": "密码",
+      "font_class": "mima",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
+      "icon_id": "3186910",
+      "name": "员工",
+      "font_class": "yuangong",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
+      "icon_id": "18853244",
+      "name": "管理员",
+      "font_class": "guanliyuan",
+      "unicode": "e67b",
+      "unicode_decimal": 59003
+    },
+    {
+      "icon_id": "1282",
+      "name": "列表",
+      "font_class": "liebiao",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    }
+  ]
+}
